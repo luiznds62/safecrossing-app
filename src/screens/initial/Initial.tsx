@@ -3,6 +3,9 @@ import { StyleSheet, Text, View } from 'react-native';
 import Heading from '../../components/molecules/heading/Heading';
 import ImageLogo from '../../components/molecules/image-logo/ImageLogo';
 import MutedText from '../../components/atoms/muted-text/Text';
+import IconButton from '../../components/atoms/icon-button/IconButton';
+import { COLOR_PRIMARY } from '../../styles/colors';
+import { SCREENS } from '../../navigations/screens';
 
 class Initial extends Component {
     navigation: any;
@@ -14,6 +17,10 @@ class Initial extends Component {
         this.navigation = props.navigation;
     }
 
+    moveToLogin() {
+        this.navigation.navigate(SCREENS.LOGIN);
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -23,6 +30,9 @@ class Initial extends Component {
                 <View style={styles.heading}>
                     <MutedText style={styles.welcome} text={this.welcomeText}/>
                     <Heading text={this.headingText} />
+                </View>
+                <View style={styles.bottomButton}>
+                    <IconButton icon="arrow-right-circle" color={COLOR_PRIMARY} onPress={() => this.moveToLogin()}/>
                 </View>
             </View>
         );
@@ -44,7 +54,12 @@ const styles = StyleSheet.create({
     },
     welcome: {
         marginTop: '6%',
-        marginBottom: '6%'
+        marginBottom: '4%'
+    },
+    bottomButton: {
+        marginTop: '6%',
+        paddingRight: '8%',
+        paddingLeft: '8%'
     }
 });
 

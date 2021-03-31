@@ -9,6 +9,7 @@ import Login from './src/screens/login/Login';
 import Main from './src/screens/main/Main';
 import SignUp from './src/screens/sign-up/SignUp';
 import { STACK_NAVIGATIONS_OPTIONS } from './src/navigations/options';
+import { SCREENS } from './src/navigations/screens';
 
 export default function App() {
     let [fontsLoaded] = useFonts({
@@ -25,10 +26,10 @@ export default function App() {
     return (
         <NavigationContainer>
             <Stack.Navigator screenOptions={STACK_NAVIGATIONS_OPTIONS}>
-                <Stack.Screen name="Initial" component={Initial} />
-                <Stack.Screen name="Login" component={Login} />
-                <Stack.Screen name="Main" component={Main} />
-                <Stack.Screen name="SignUp" component={SignUp} />
+                <Stack.Screen name={SCREENS.INITIAL} component={Initial} />
+                <Stack.Screen name={SCREENS.LOGIN} component={Login} />
+                <Stack.Screen name={SCREENS.MAIN} component={Main} />
+                <Stack.Screen name={SCREENS.SIGN_UP} component={SignUp} />
             </Stack.Navigator>
         </NavigationContainer>
     );

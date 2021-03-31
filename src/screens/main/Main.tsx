@@ -15,7 +15,7 @@ class Main extends Component {
         return (
             <View style={styles.container}>
                 <Text style={styles.text}>Main</Text>
-                <Text onPress={() => this.navigation.navigate('Main')}>Go next</Text>
+                <Text onPress={() => this.navigation.navigate('SignUp')}>Go next</Text>
                 <StatusBar style="auto" />
             </View>
         );

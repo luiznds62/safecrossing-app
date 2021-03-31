@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import { FONT_FAMILY_BOLD, LINE_HEIGHT_26 } from '../../styles/typography';
+import Heading from '../../components/molecules/heading/Heading';
+import ImageLogo from '../../components/molecules/image-logo/ImageLogo';
+import MutedText from '../../components/atoms/muted-text/Text';
 
 class Initial extends Component {
     navigation: any;
+    welcomeText = 'Bem-vindo';
+    headingText = 'Este aplicativo irá te  auxíliar na travessia de ruas com semáforos';
 
     constructor(props: any) {
         super(props);
@@ -14,9 +17,13 @@ class Initial extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.text}>Initial</Text>
-                <Text onPress={() => this.navigation.navigate('Login')}>Go next</Text>
-                <StatusBar style="auto" />
+                <View style={styles.imageLogo}>
+                    <ImageLogo />
+                </View>
+                <View style={styles.heading}>
+                    <MutedText style={styles.welcome} text={this.welcomeText}/>
+                    <Heading text={this.headingText} />
+                </View>
             </View>
         );
     }
@@ -25,14 +32,20 @@ class Initial extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
+        backgroundColor: '#FFFFFF',
     },
-    text: {
-        fontFamily: FONT_FAMILY_BOLD,
-        fontSize: LINE_HEIGHT_26,
+    imageLogo: {
+        flex: 0.7,
+        marginTop: '30%'
     },
+    heading: {
+        paddingLeft: '8%',
+        paddingRight: '8%'
+    },
+    welcome: {
+        marginTop: '6%',
+        marginBottom: '6%'
+    }
 });
 
 export default Initial;

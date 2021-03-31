@@ -15,7 +15,7 @@ class SignUp extends Component {
         return (
             <View style={styles.container}>
                 <Text style={styles.text}>SignUp</Text>
-                <Text onPress={() => this.navigation.navigate('SignUp')}>Go next</Text>
+                <Text onPress={() => this.navigation.navigate('Initial')}>Go next</Text>
                 <StatusBar style="auto" />
             </View>
         );

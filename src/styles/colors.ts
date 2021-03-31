@@ -9,6 +9,5 @@ export const COLOR_WARNING = '#ffae00';
 export const COLOR_ALERT = '#cc4b37';
 
 // GRAYSCALE
-export const COLOR_GRAY_LIGHT = '#e6e6e6';
-export const COLOR_GRAY_MEDIUM = '#cacaca';
-export const COLOR_GRAY_DARK = '#8a8a8a';
+export const COLOR_GRAY_LIGHT = '#F5F5F5';
+export const COLOR_GRAY_MEDIUM = '#B9B9BC';

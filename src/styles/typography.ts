@@ -1,8 +1,8 @@
 import { scaleFont } from './mixins';
 
 // FONT FAMILY
-export const FONT_FAMILY_REGULAR = 'OpenSans-Regular';
-export const FONT_FAMILY_BOLD = 'OpenSans-Bold';
+export const FONT_FAMILY_REGULAR = 'NunitoSans_700Bold';
+export const FONT_FAMILY_BOLD = 'NunitoSans_800ExtraBold';
 
 // FONT WEIGHT
 export const FONT_WEIGHT_REGULAR = '400';
@@ -14,6 +14,7 @@ export const FONT_SIZE_14 = scaleFont(14);
 export const FONT_SIZE_12 = scaleFont(12);
 
 // LINE HEIGHT
+export const LINE_HEIGHT_26 = scaleFont(26);
 export const LINE_HEIGHT_24 = scaleFont(24);
 export const LINE_HEIGHT_20 = scaleFont(20);
 export const LINE_HEIGHT_16 = scaleFont(16);

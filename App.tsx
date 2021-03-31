@@ -1,21 +1,35 @@
-import { StatusBar } from 'expo-status-bar';
+import 'react-native-gesture-handler';
+import { useFonts, NunitoSans_700Bold, NunitoSans_800ExtraBold } from '@expo-google-fonts/nunito-sans';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import AppLoading from 'expo-app-loading';
+import Initial from './src/screens/initial/Initial';
+import Login from './src/screens/login/Login';
+import Main from './src/screens/main/Main';
+import SignUp from './src/screens/sign-up/SignUp';
+import { STACK_NAVIGATIONS_OPTIONS } from './src/navigations/options';
 
 export default function App() {
+    let [fontsLoaded] = useFonts({
+        NunitoSans_700Bold,
+        NunitoSans_800ExtraBold,
+    });
+
+    if (!fontsLoaded) {
+        return <AppLoading />;
+    }
+
+    const Stack = createStackNavigator();
+
     return (
-        <View style={styles.container}>
-            <Text>Hello world</Text>
-            <StatusBar style="auto" />
-        </View>
+        <NavigationContainer>
+            <Stack.Navigator screenOptions={STACK_NAVIGATIONS_OPTIONS}>
+                <Stack.Screen name="Initial" component={Initial} />
+                <Stack.Screen name="Login" component={Login} />
+                <Stack.Screen name="Main" component={Main} />
+                <Stack.Screen name="SignUp" component={SignUp} />
+            </Stack.Navigator>
+        </NavigationContainer>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-});

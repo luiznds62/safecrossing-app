@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { FONT_FAMILY_BOLD, LINE_HEIGHT_26 } from '../../styles/typography';
+import { StyleSheet, View } from 'react-native';
+import { LoginForm } from '../../components/organisms/login-form/LoginForm';
+import { LoginHeader } from '../../components/organisms/login-header/LoginHeader';
+import { COLOR_WHITE } from '../../styles/colors';
 
 class Login extends Component {
     navigation: any;
@@ -14,9 +15,8 @@ class Login extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.text}>Login</Text>
-                <Text onPress={() => this.navigation.navigate('Main')}>Go next</Text>
-                <StatusBar style="auto" />
+                <LoginHeader/>
+                <LoginForm/>
             </View>
         );
     }
@@ -25,14 +25,8 @@ class Login extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    text: {
-        fontFamily: FONT_FAMILY_BOLD,
-        fontSize: LINE_HEIGHT_26,
-    },
+        backgroundColor: COLOR_WHITE,
+    }
 });
 
 export default Login;

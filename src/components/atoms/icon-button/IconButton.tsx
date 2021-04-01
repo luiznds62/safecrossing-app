@@ -13,13 +13,14 @@ const IconButton = (props: any) => {
             borderRadius: 6,
             justifyContent: 'center',
             alignItems: 'center',
+            ...props.style
         },
     });
 
     return (
         <TouchableHighlight activeOpacity={0.6} underlayColor={COLOR_GRAY_LIGHT} onPress={props.onPress}>
             <View style={styles.container}>
-                <MaterialCommunityIcons name={props.icon} color={COLOR_WHITE} size={24}/>
+                <MaterialCommunityIcons name={props.icon} color={props.iconColor || COLOR_WHITE} size={24}/>
             </View>
         </TouchableHighlight>
     );

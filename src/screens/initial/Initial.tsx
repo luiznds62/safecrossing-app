@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Heading from '../../components/molecules/heading/Heading';
 import ImageLogo from '../../components/molecules/image-logo/ImageLogo';
-import MutedText from '../../components/atoms/muted-text/Text';
+import MutedText from '../../components/atoms/muted-text/MutedText';
 import IconButton from '../../components/atoms/icon-button/IconButton';
-import { COLOR_PRIMARY } from '../../styles/colors';
+import { COLOR_PRIMARY, COLOR_WHITE } from '../../styles/colors';
 import { SCREENS } from '../../navigations/screens';
 
 class Initial extends Component {
@@ -42,7 +42,7 @@ class Initial extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#FFFFFF',
+        backgroundColor: COLOR_WHITE,
     },
     imageLogo: {
         flex: 0.7,

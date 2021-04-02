@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { COLOR_BLACK, COLOR_GRAY_MEDIUM, COLOR_PRIMARY, COLOR_WHITE } from '../../../styles/colors';
+import { COLOR_WHITE } from '../../../styles/colors';
+import { ButtonGoogleSign } from '../../atoms/button-google-sign/ButtonGoogleSign';
 import Button from '../../atoms/button/Button';
-import IconButton from '../../atoms/icon-button/IconButton';
-
+import NoBorderButton from '../../atoms/no-border-button/NoBorderButton';
 export class LoginButtons extends Component {
     styles = StyleSheet.create({
         container: {
             flex: 2,
             backgroundColor: COLOR_WHITE,
-            marginTop: '2%'
+            marginTop: '2%',
         },
         buttonsMargin: {
-            backgroundColor: COLOR_WHITE,
-            borderColor: COLOR_GRAY_MEDIUM,
             marginTop: '4%',
         },
     });
@@ -21,8 +19,9 @@ export class LoginButtons extends Component {
     render() {
         return (
             <View style={this.styles.container}>
-                <Button primary title="Login" />
-                <IconButton style={this.styles.buttonsMargin} icon="google" iconColor={COLOR_BLACK}/>
+                <Button primary title="Login" onPress={() => console.log('Login')} />
+                <ButtonGoogleSign style={this.styles.buttonsMargin} />
+                <NoBorderButton title="Pular" style={this.styles.buttonsMargin} onPress={() => console.log('Pular')} />
             </View>
         );
     }

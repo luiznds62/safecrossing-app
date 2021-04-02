@@ -1,7 +1,14 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
-import { COLOR_ACCENT, COLOR_BLACK, COLOR_GRAY_MEDIUM, COLOR_PRIMARY, COLOR_SECONDARY, COLOR_WHITE } from '../../../styles/colors';
+import {
+    COLOR_ACCENT,
+    COLOR_BLACK,
+    COLOR_GRAY_MEDIUM,
+    COLOR_PRIMARY,
+    COLOR_SECONDARY,
+    COLOR_WHITE,
+} from '../../../styles/colors';
 import { FONT_FAMILY_BOLD, LINE_HEIGHT_16 } from '../../../styles/typography';
 
 const Input = (props: any) => {
@@ -31,6 +38,9 @@ const Input = (props: any) => {
 
     return (
         <TextInput
+            autoCapitalize={props.autoCapitalize}
+            keyboardType={props.keyboardType || 'default'}
+            secureTextEntry={props.secureTextEntry}
             value={props.value}
             textContentType={props.textContentType}
             onChange={props.onChange}

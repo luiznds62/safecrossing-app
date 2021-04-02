@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
         backgroundColor: COLOR_WHITE,
     },
     imageLogo: {
-        flex: 0.7,
+        flex: 0.85,
         marginTop: '30%'
     },
     heading: {

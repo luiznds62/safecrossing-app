@@ -12,19 +12,35 @@ export class LoginForm extends Component {
             backgroundColor: COLOR_WHITE,
             marginTop: '12%',
             paddingLeft: '8%',
-            paddingRight: '8%'
+            paddingRight: '8%',
         },
         inputDistance: {
-            marginTop: '6%'
-        }
+            marginTop: '4%',
+        },
     });
 
     render() {
-        return <View style={this.styles.container}>
-            <Input secondary placeholder="E-mail" textContentType="email" placeholderTextColor={COLOR_BLACK}/>
-            <Input style={this.styles.inputDistance} placeholder="Senha" placeholderTextColor={COLOR_WHITE}/>
-            <ForgotPassword/>
-            <LoginButtons/>
-        </View>;
+        return (
+            <View style={this.styles.container}>
+                <Input
+                    secondary
+                    autoCapitalize="none"
+                    keyboardType="email-address"
+                    placeholder="E-mail"
+                    textContentType="emailAddress"
+                    placeholderTextColor={COLOR_BLACK}
+                />
+                <Input
+                    autoCapitalize="none"
+                    style={this.styles.inputDistance}
+                    secureTextEntry={true}
+                    textContentType="password"
+                    placeholder="Senha"
+                    placeholderTextColor={COLOR_WHITE}
+                />
+                <ForgotPassword />
+                <LoginButtons />
+            </View>
+        );
     }
 }

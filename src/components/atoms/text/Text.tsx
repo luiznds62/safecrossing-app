@@ -14,7 +14,7 @@ const Text = (props: any) => {
         },
     });
 
-    return <TextComponent style={styles.text}>{props.text}</TextComponent>;
+    return <TextComponent onPress={props.onPress} style={styles.text}>{props.text}</TextComponent>;
 };
 
 export default Text;

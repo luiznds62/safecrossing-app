@@ -15,7 +15,7 @@ class Login extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <LoginHeader/>
+                <LoginHeader navigation={this.navigation}/>
                 <LoginForm/>
             </View>
         );

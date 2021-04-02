@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { FONT_FAMILY_BOLD, LINE_HEIGHT_26 } from '../../styles/typography';
+import { COLOR_WHITE } from '../../styles/colors';
+import { NavigateBack } from '../../components/atoms/navigate-back/NavigateBack';
+import { SignUpHeader } from '../../components/organisms/sign-up-header/SignUpHeader';
+import { SignUpForm } from '../../components/organisms/sign-up-form/SignUpForm';
 
 class SignUp extends Component {
     navigation: any;
@@ -14,9 +17,9 @@ class SignUp extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.text}>SignUp</Text>
-                <Text onPress={() => this.navigation.navigate('Initial')}>Go next</Text>
-                <StatusBar style="auto" />
+                <NavigateBack navigation={this.navigation} />
+                <SignUpHeader/>
+                <SignUpForm/>
             </View>
         );
     }
@@ -25,9 +28,10 @@ class SignUp extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
+        backgroundColor: COLOR_WHITE,
+        paddingLeft: '8%',
+        paddingRight: '8%',
+        paddingTop: '20%',
     },
     text: {
         fontFamily: FONT_FAMILY_BOLD,

@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { COLOR_BLACK, COLOR_WHITE } from '../../../styles/colors';
-import { ForgotPassword } from '../../molecules/forgot-password/ForgotPassword';
-import { LoginButtons } from '../../molecules/login-buttons/LoginButtons';
+import { SCREENS } from '../../../navigations/screens';
 import Input from '../../atoms/input/Input';
 import MutedText from '../../atoms/muted-text/MutedText';
 import Button from '../../atoms/button/Button';
+export class SignUpForm extends React.Component<any> {
+    navigation: any;
 
-export class SignUpForm extends Component {
+    constructor(props: any) {
+        super(props);
+        this.navigation = props.navigation;
+    }
+
     styles = StyleSheet.create({
         container: {
             flex: 4,
@@ -20,9 +25,13 @@ export class SignUpForm extends Component {
             marginTop: '2%',
         },
         buttonDistance: {
-            paddingTop: '15%'
-        }
+            paddingTop: '15%',
+        },
     });
+
+    signUp() {
+        this.navigation.navigate(SCREENS.MAIN);
+    }
 
     render() {
         return (
@@ -53,7 +62,7 @@ export class SignUpForm extends Component {
                 />
                 <MutedText style={this.styles.smallDistance} text="Deve ter mais de 6 caracteres" />
                 <View style={this.styles.buttonDistance}>
-                    <Button primary title="Cadastrar" onPress={() => console.log('Cadastrar')} />
+                    <Button primary title="Cadastrar" onPress={() => this.signUp()} />
                 </View>
             </View>
         );

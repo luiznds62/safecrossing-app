@@ -19,7 +19,7 @@ class SignUp extends Component {
             <View style={styles.container}>
                 <NavigateBack navigation={this.navigation} />
                 <SignUpHeader/>
-                <SignUpForm/>
+                <SignUpForm navigation={this.navigation} />
             </View>
         );
     }

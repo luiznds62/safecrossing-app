@@ -6,19 +6,22 @@ import Text from '../../atoms/text/Text';
 
 interface IHeading {
     text: string;
+    style?: any
 }
 
 const Heading = (props: IHeading) => {
+
+    const styles = StyleSheet.create({
+        text: {
+            fontFamily: FONT_FAMILY_BOLD,
+            fontSize: LINE_HEIGHT_26,
+            color: COLOR_BLACK,
+            textAlign: 'left',
+            ...props.style
+        },
+    });
+    
     return <Text text={props.text} style={styles.text} />;
 };
-
-const styles = StyleSheet.create({
-    text: {
-        fontFamily: FONT_FAMILY_BOLD,
-        fontSize: LINE_HEIGHT_26,
-        color: COLOR_BLACK,
-        textAlign: 'left'
-    },
-});
 
 export default Heading;

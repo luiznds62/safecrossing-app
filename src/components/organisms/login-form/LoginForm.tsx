@@ -1,11 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { COLOR_BLACK, COLOR_WHITE } from '../../../styles/colors';
 import { ForgotPassword } from '../../molecules/forgot-password/ForgotPassword';
 import { LoginButtons } from '../../molecules/login-buttons/LoginButtons';
+import { SCREENS } from '../../../navigations/screens';
 import Input from '../../atoms/input/Input';
+export class LoginForm extends React.Component<any> {
+    constructor(props: any) {
+        super(props);
+    }
 
-export class LoginForm extends Component {
     styles = StyleSheet.create({
         container: {
             flex: 1,
@@ -18,6 +22,10 @@ export class LoginForm extends Component {
             marginTop: '4%',
         },
     });
+
+    doLogin() {
+        this.props.navigation.navigate(SCREENS.MAIN);
+    }
 
     render() {
         return (
@@ -39,7 +47,7 @@ export class LoginForm extends Component {
                     placeholderTextColor={COLOR_WHITE}
                 />
                 <ForgotPassword />
-                <LoginButtons />
+                <LoginButtons navigation={this.props.navigation} doLogin={() => this.doLogin()} />
             </View>
         );
     }

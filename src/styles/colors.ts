@@ -4,6 +4,10 @@ export const COLOR_ACCENT = '#99D5F3';
 export const COLOR_WHITE = '#FFFFFF';
 export const COLOR_BLACK = '#000000';
 
+// TRAFFIC LIGHTS
+export const COLOR_GREEN = '#58AE7A';
+export const COLOR_RED = '#B124';
+
 // ACTIONS
 export const COLOR_SUCCESS = '#3adb76';
 export const COLOR_WARNING = '#ffae00';

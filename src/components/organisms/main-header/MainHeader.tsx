@@ -30,7 +30,7 @@ export const MainHeader = (props: any) => {
             <MutedText text="Bem-vindo!" />
 
             <View style={styles.bottomHeader}>
-                <Heading text="Procurando semáforos" />
+                <Heading text="Procurando semáforos..." />
                 <MutedText
                     style={styles.textDistance}
                     text="Ao se aproximar de um semáforo serão disparados alertas sonoros e vibratórios para te alertar se é seguro realizar a travessia."

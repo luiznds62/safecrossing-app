@@ -6,7 +6,7 @@ export const COLOR_BLACK = '#000000';
 
 // TRAFFIC LIGHTS
 export const COLOR_GREEN = '#58AE7A';
-export const COLOR_RED = '#B124';
+export const COLOR_RED = '#B12441';
 
 // ACTIONS
 export const COLOR_SUCCESS = '#3adb76';

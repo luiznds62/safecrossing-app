@@ -4,6 +4,7 @@ import { FONT_FAMILY_BOLD, LINE_HEIGHT_26 } from '../../styles/typography';
 import { MainHeader } from '../../components/organisms/main-header/MainHeader';
 import { COLOR_WHITE } from '../../styles/colors';
 import { NearTrafficLight } from '../../components/molecules/near-traffic-light/NearTrafficLight';
+import { MainStatus } from '../../components/organisms/main-status/MainStatus';
 
 class Main extends Component {
     navigation: any;
@@ -25,7 +26,10 @@ class Main extends Component {
             fontSize: LINE_HEIGHT_26,
         },
         nearTrafficLight: {
-            flex: 2.2,
+            paddingTop: '8%',
+        },
+        mainStatus: {
+            paddingTop: '16%',
         },
     });
 
@@ -34,6 +38,7 @@ class Main extends Component {
             <View style={this.styles.container}>
                 <MainHeader name="Luiz" />
                 <NearTrafficLight style={this.styles.nearTrafficLight} showMap={true} />
+                <MainStatus style={this.styles.mainStatus} />
             </View>
         );
     }

@@ -7,7 +7,6 @@ import Heading from '../../molecules/heading/Heading';
 export const MainHeader = (props: any) => {
     const styles = StyleSheet.create({
         container: {
-            flex: 1,
             backgroundColor: COLOR_WHITE,
             paddingTop: '35%',
         },

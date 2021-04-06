@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { TRAFFIC_LIGHT_STATUSES } from '../../../utils/constants';
-import {TrafficLightStatus} from '../../atoms/traffic-light-status/TrafficLightStatus';
+import { TrafficLightStatus } from '../../atoms/traffic-light-status/TrafficLightStatus';
 import Heading from '../../molecules/heading/Heading';
 class MainStatus extends React.Component<any> {
     constructor(props: any) {
@@ -13,15 +13,21 @@ class MainStatus extends React.Component<any> {
             ...this.props.style,
         },
         trafficLightContainer: {
-            marginTop: '4%'
-        }
+            marginTop: '4%',
+            ...this.props.cardStyle
+        },
     });
 
     render() {
         return (
             <View style={this.styles.container}>
                 <Heading text="Status" />
-                <TrafficLightStatus style={this.styles.trafficLightContainer} safe={TRAFFIC_LIGHT_STATUSES.SAFE} />
+                <TrafficLightStatus
+                    block={this.props.block}
+                    navigation={this.props.navigation}
+                    style={this.styles.trafficLightContainer}
+                    safe={TRAFFIC_LIGHT_STATUSES.SAFE}
+                />
             </View>
         );
     }

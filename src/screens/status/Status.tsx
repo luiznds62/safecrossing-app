@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { FONT_FAMILY_BOLD, LINE_HEIGHT_26 } from '../../styles/typography';
-import { MainHeader } from '../../components/organisms/main-header/MainHeader';
 import { COLOR_WHITE } from '../../styles/colors';
+import Text from '../../components/atoms/text/Text';
 import { NearTrafficLight } from '../../components/molecules/near-traffic-light/NearTrafficLight';
 import { MainStatus } from '../../components/organisms/main-status/MainStatus';
 
-class Main extends Component {
+class Status extends Component {
     navigation: any;
 
     constructor(props: any) {
@@ -21,27 +20,30 @@ class Main extends Component {
             paddingLeft: '8%',
             paddingRight: '8%',
         },
-        text: {
-            fontFamily: FONT_FAMILY_BOLD,
-            fontSize: LINE_HEIGHT_26,
-        },
-        nearTrafficLight: {
-            paddingTop: '8%',
+        nearTrafficLightContainer: {
+            paddingTop: '24%',
         },
         mainStatus: {
-            paddingTop: '16%',
+            paddingTop: '8%',
+        },
+        cardStyle: {
+            height: '85%',
         },
     });
 
     render() {
         return (
             <View style={this.styles.container}>
-                <MainHeader name="Luiz" />
-                <NearTrafficLight style={this.styles.nearTrafficLight} showMap={true} />
-                <MainStatus navigation={this.navigation} style={this.styles.mainStatus} />
+                <NearTrafficLight style={this.styles.nearTrafficLightContainer} showMap={false} />
+                <MainStatus
+                    block={true}
+                    navigation={this.navigation}
+                    style={this.styles.mainStatus}
+                    cardStyle={this.styles.cardStyle}
+                />
             </View>
         );
     }
 }
 
-export default Main;
+export default Status;

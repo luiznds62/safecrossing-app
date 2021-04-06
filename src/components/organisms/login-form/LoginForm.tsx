@@ -20,6 +20,7 @@ export class LoginForm extends React.Component<any> {
         },
         inputDistance: {
             marginTop: '4%',
+            marginBottom: '40%'
         },
     });
 
@@ -46,7 +47,6 @@ export class LoginForm extends React.Component<any> {
                     placeholder="Senha"
                     placeholderTextColor={COLOR_WHITE}
                 />
-                <ForgotPassword />
                 <LoginButtons navigation={this.props.navigation} doLogin={() => this.doLogin()} />
             </View>
         );

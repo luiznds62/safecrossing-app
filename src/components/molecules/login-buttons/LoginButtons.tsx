@@ -20,7 +20,6 @@ export class LoginButtons extends React.Component<any> {
         return (
             <View style={this.styles.container}>
                 <Button primary title="Login" onPress={this.props.doLogin} />
-                <ButtonGoogleSign style={this.styles.buttonsMargin} />
                 <NoBorderButton title="Pular" style={this.styles.buttonsMargin} onPress={() => console.log('Pular')} />
             </View>
         );

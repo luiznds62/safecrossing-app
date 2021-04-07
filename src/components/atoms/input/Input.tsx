@@ -43,7 +43,7 @@ const Input = (props: any) => {
             secureTextEntry={props.secureTextEntry}
             value={props.value}
             textContentType={props.textContentType}
-            onChange={props.onChange}
+            onChangeText={props.onChange}
             placeholderTextColor={props.placeholderTextColor}
             placeholder={props.placeholder}
             style={styles.input}

@@ -26,10 +26,13 @@ class Main extends Component {
             fontSize: LINE_HEIGHT_26,
         },
         nearTrafficLight: {
-            paddingTop: '8%',
+            paddingTop: '16%',
         },
         mainStatus: {
             paddingTop: '16%',
+        },
+        cardStyle: {
+            height: '65%'
         },
     });
 
@@ -37,8 +40,12 @@ class Main extends Component {
         return (
             <View style={this.styles.container}>
                 <MainHeader name="Luiz" />
-                <NearTrafficLight style={this.styles.nearTrafficLight} showMap={true} />
-                <MainStatus navigation={this.navigation} style={this.styles.mainStatus} />
+                <NearTrafficLight style={this.styles.nearTrafficLight} showMap={false} />
+                <MainStatus
+                    navigation={this.navigation}
+                    style={this.styles.mainStatus}
+                    cardStyle={this.styles.cardStyle}
+                />
             </View>
         );
     }

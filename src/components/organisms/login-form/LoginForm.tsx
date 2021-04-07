@@ -16,6 +16,7 @@ export class LoginForm extends React.Component<any> {
         this.state = {
             email: '',
             password: '',
+            loading: false,
         };
     }
 
@@ -40,16 +41,22 @@ export class LoginForm extends React.Component<any> {
         };
     }
 
+    setLoading(bool: boolean) {
+        this.setState({ loading: bool });
+    }
+
     async doLogin(isGuess: any) {
         try {
+            this.setLoading(true);
             const login = this.buildLogin(isGuess);
-            console.log(login)
             const response = await this.apiService.login(login);
             if (response.status === HTTP_CODES.OK) {
                 this.props.navigation.navigate(SCREENS.MAIN);
             }
         } catch (error) {
             console.log(error);
+        } finally {
+            this.setLoading(false);
         }
     }
 
@@ -62,7 +69,7 @@ export class LoginForm extends React.Component<any> {
                     keyboardType="email-address"
                     placeholder="E-mail"
                     textContentType="emailAddress"
-                    onChange={(value: any) => this.setState({email: value})}
+                    onChange={(value: any) => this.setState({ email: value })}
                     placeholderTextColor={COLOR_BLACK}
                 />
                 <Input
@@ -71,10 +78,15 @@ export class LoginForm extends React.Component<any> {
                     secureTextEntry={true}
                     textContentType="password"
                     placeholder="Senha"
-                    onChange={(value: any) => this.setState({password: value})}
+                    onChange={(value: any) => this.setState({ password: value })}
                     placeholderTextColor={COLOR_WHITE}
                 />
-                <LoginButtons navigation={this.props.navigation} doLogin={() => this.doLogin(false)} loginAsGuest={() => this.doLogin(true)}/>
+                <LoginButtons
+                    loading={(this.state as any).loading}
+                    navigation={this.props.navigation}
+                    doLogin={() => this.doLogin(false)}
+                    loginAsGuest={() => this.doLogin(true)}
+                />
             </View>
         );
     }

@@ -19,14 +19,14 @@ export const MainHeader = (props: any) => {
         textDistance: {
             paddingTop: '2%',
             textAlign: 'left',
-            lineHeight: 25
-        }
+            lineHeight: 25,
+        },
     });
 
     return (
         <View style={styles.container}>
             <Heading style={styles.headerHeading} text={`Olá, ${props.name || 'amigo'}`} />
-            <MutedText text="Bem-vindo!" />
+            <MutedText text="Bem-vindx!" />
 
             <View style={styles.bottomHeader}>
                 <Heading text="Procurando semáforos..." />

@@ -5,13 +5,18 @@ import { MainHeader } from '../../components/organisms/main-header/MainHeader';
 import { COLOR_WHITE } from '../../styles/colors';
 import { NearTrafficLight } from '../../components/molecules/near-traffic-light/NearTrafficLight';
 import { MainStatus } from '../../components/organisms/main-status/MainStatus';
-
+import { store } from '../../store/index';
 class Main extends Component {
-    navigation: any;
+    private store: any;
+    private navigation: any;
 
     constructor(props: any) {
         super(props);
         this.navigation = props.navigation;
+        this.store = store.getState().userReducer;
+        this.state = {
+            location: '',
+        };
     }
 
     styles = StyleSheet.create({
@@ -32,14 +37,14 @@ class Main extends Component {
             paddingTop: '16%',
         },
         cardStyle: {
-            height: '65%'
+            height: '65%',
         },
     });
 
     render() {
         return (
             <View style={this.styles.container}>
-                <MainHeader name="Luiz" />
+                <MainHeader name={this.store.user.name} />
                 <NearTrafficLight style={this.styles.nearTrafficLight} showMap={false} />
                 <MainStatus
                     navigation={this.navigation}

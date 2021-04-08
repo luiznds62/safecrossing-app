@@ -8,22 +8,59 @@ import Text from '../../atoms/text/Text';
 import MutedText from '../../atoms/muted-text/MutedText';
 import MapView from 'react-native-maps';
 import { Marker } from 'react-native-maps';
+import { TrafficLightService } from '../../../services/TrafficLightService';
+import { LocationService } from '../../../services/LocationService';
+import { Alert } from '../../atoms/alert/Alert';
 
 class NearTrafficLight extends React.Component<any> {
+    private locationService: LocationService;
+    private trafficLightService: TrafficLightService;
+
     constructor(props: any) {
         super(props);
+        this.locationService = new LocationService();
+        this.trafficLightService = new TrafficLightService();
         this.state = {
+            location: '',
             coordinate: {
-                latitude: -28.665847,
-                longitude: -49.425230,
+                latitude: '',
+                longitude: '',
             },
-            region: {
-                latitude: -28.665847,
-                longitude: -49.425230,
-                latitudeDelta: 0.006,
-                longitudeDelta: 0.006,
-            },
+            nearbyTrafficLight: {},
+            metadata: {},
+            loading: false,
         };
+    }
+
+    setLoading(bool: boolean) {
+        this.setState({ loading: bool });
+    }
+
+    async componentDidMount() {
+        try {
+            this.setLoading(true);
+            const location = await this.locationService.getCurrentLocation();
+            const nearbyTrafficLight = await this.trafficLightService.findNearby(
+                location.coords.latitude,
+                location.coords.longitude
+            );
+
+            this.setState({
+                location: location,
+                nearbyTrafficLight: nearbyTrafficLight.trafficLight,
+                metadata: nearbyTrafficLight.metadata,
+            });
+        } catch (error) {
+            Alert(
+                'Erro ao buscar',
+                'Ocorreu um erro ao buscar semáforos próximos, fique alerta!',
+                false,
+                () => {},
+                () => {}
+            );
+        } finally {
+            this.setLoading(false);
+        }
     }
 
     styles = StyleSheet.create({
@@ -51,6 +88,9 @@ class NearTrafficLight extends React.Component<any> {
             height: 160,
             borderRadius: 6,
         },
+        loading: { 
+            
+        }
     });
 
     render() {
@@ -58,14 +98,27 @@ class NearTrafficLight extends React.Component<any> {
             <View style={this.styles.container}>
                 <Heading text="Próximos" />
                 <View style={this.styles.locationContainer}>
-                    <MaterialCommunityIcons name="map-marker" size={24} color={COLOR_ACCENT} />
-                    <View style={this.styles.streetContainer}>
-                        <Text text="Avenida Universitária" />
-                        <MutedText text="Criciúma, SC, Brasil" />
-                    </View>
-                    <View style={this.styles.distanceContainer}>
-                        <Text style={this.styles.distanceText} text="50m apróx" />
-                    </View>
+                    {!(this.state as any).loading ? (
+                        <>
+                            <MaterialCommunityIcons name="map-marker" size={24} color={COLOR_ACCENT} />
+                            <View style={this.styles.streetContainer}>
+                                <Text text={(this.state as any).metadata.destinationAddress} />
+                                <MutedText
+                                    text={`${(this.state as any).metadata.destinationCity}, ${
+                                        (this.state as any).metadata.destinationState
+                                    }, ${(this.state as any).metadata.destinationCountry}`}
+                                />
+                            </View>
+                            <View style={this.styles.distanceContainer}>
+                                <Text
+                                    style={this.styles.distanceText}
+                                    text={`${(this.state as any).metadata.distance}km apróx`}
+                                />
+                            </View>
+                        </>
+                    ) : <View style={this.styles.loading}>
+                            <MutedText text="Carregando, aguarde..."/>
+                        </View>}
                 </View>
                 {this.props.showMap && (
                     <View style={this.styles.mapContainer}>

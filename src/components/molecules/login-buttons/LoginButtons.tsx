@@ -15,12 +15,19 @@ export class LoginButtons extends React.Component<any> {
         buttonsMargin: {
             marginTop: '4%',
         },
+        loading: {
+            alignItems: 'center',
+        },
     });
 
     render() {
         return (
             <View style={this.styles.container}>
-                {this.props.loading && <Text text="Aguarde" />}
+                {this.props.loading && (
+                    <View style={this.styles.loading}>
+                        <Text text="Aguarde" />
+                    </View>
+                )}
                 {!this.props.loading && (
                     <View>
                         <Button primary title="Login" onPress={this.props.doLogin} />

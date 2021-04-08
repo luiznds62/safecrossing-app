@@ -1,23 +1,31 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { COLOR_BLACK, COLOR_WHITE } from '../../../styles/colors';
-import { ForgotPassword } from '../../molecules/forgot-password/ForgotPassword';
 import { LoginButtons } from '../../molecules/login-buttons/LoginButtons';
 import { SCREENS } from '../../../navigations/screens';
-import Input from '../../atoms/input/Input';
-import { ApiService } from '../../../services/ApiService';
+import { UserService } from '../../../services/UserService';
 import { HTTP_CODES } from '../../../utils/constants';
+import { store } from '../../../store';
+import Input from '../../atoms/input/Input';
 export class LoginForm extends React.Component<any> {
-    private apiService: ApiService;
+    private store: any;
+    private userService: UserService;
 
     constructor(props: any) {
         super(props);
-        this.apiService = new ApiService();
+        this.userService = new UserService();
+        this.store = store.getState().userReducer;
         this.state = {
             email: '',
             password: '',
             loading: false,
         };
+    }
+
+    componentDidMount() {
+        if(this.store.user.name !== "") {
+            this.props.navigation.navigate(SCREENS.MAIN);
+        }
     }
 
     styles = StyleSheet.create({
@@ -36,8 +44,8 @@ export class LoginForm extends React.Component<any> {
 
     buildLogin(isGuess: boolean = false) {
         return {
-            email: isGuess ? 'guessuser@safecrossing.com' : (this.state as any).email,
-            password: isGuess ? 'guessuser' : (this.state as any).password,
+            email: isGuess ? 'guest@guest.com' : (this.state as any).email,
+            password: isGuess ? 'guest1234' : (this.state as any).password,
         };
     }
 
@@ -49,7 +57,7 @@ export class LoginForm extends React.Component<any> {
         try {
             this.setLoading(true);
             const login = this.buildLogin(isGuess);
-            const response = await this.apiService.login(login);
+            const response = await this.userService.login(login);
             if (response.status === HTTP_CODES.OK) {
                 this.props.navigation.navigate(SCREENS.MAIN);
             }

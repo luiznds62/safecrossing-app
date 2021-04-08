@@ -2,21 +2,20 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { COLOR_BLACK, COLOR_WHITE } from '../../../styles/colors';
 import { SCREENS } from '../../../navigations/screens';
-import { ApiService } from '../../../services/ApiService';
+import { UserService } from '../../../services/UserService';
 import { HTTP_CODES } from '../../../utils/constants';
 import Input from '../../atoms/input/Input';
 import MutedText from '../../atoms/muted-text/MutedText';
 import Button from '../../atoms/button/Button';
 export class SignUpForm extends React.Component<any> {
-
-    private apiService: ApiService;
+    private userService: UserService;
 
     navigation: any;
 
     constructor(props: any) {
         super(props);
         this.navigation = props.navigation;
-        this.apiService = new ApiService();
+        this.userService = new UserService();
         this.state = {
             name: '',
             email: '',
@@ -44,16 +43,16 @@ export class SignUpForm extends React.Component<any> {
         return {
             name: (this.state as any).name,
             email: (this.state as any).email,
-            password: (this.state as any).password
-        }
+            password: (this.state as any).password,
+        };
     }
 
     async signUp() {
         try {
             const user = this.buildUser();
-            console.log(user)
-            const response = await this.apiService.createAccount(user);
-            if (response.status === HTTP_CODES.CREATED) {
+            console.log(user);
+            const response = await this.userService.createAccount(user);
+            if (response.status === HTTP_CODES.OK) {
                 this.navigation.navigate(SCREENS.MAIN);
             }
         } catch (error) {

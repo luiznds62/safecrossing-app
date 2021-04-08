@@ -32,25 +32,14 @@ class Main extends Component {
         },
         nearTrafficLight: {
             paddingTop: '16%',
-        },
-        mainStatus: {
-            paddingTop: '16%',
-        },
-        cardStyle: {
-            height: '65%',
-        },
+        }
     });
 
     render() {
         return (
             <View style={this.styles.container}>
                 <MainHeader name={this.store.user.name} />
-                <NearTrafficLight style={this.styles.nearTrafficLight} showMap={false} />
-                <MainStatus
-                    navigation={this.navigation}
-                    style={this.styles.mainStatus}
-                    cardStyle={this.styles.cardStyle}
-                />
+                <NearTrafficLight navigation={this.navigation} style={this.styles.nearTrafficLight} showMap={false} />
             </View>
         );
     }

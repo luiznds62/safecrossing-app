@@ -35,12 +35,12 @@ class Status extends Component {
         return (
             <View style={this.styles.container}>
                 <NearTrafficLight style={this.styles.nearTrafficLightContainer} showMap={false} />
-                <MainStatus
+                {/* <MainStatus
                     block={true}
                     navigation={this.navigation}
                     style={this.styles.mainStatus}
                     cardStyle={this.styles.cardStyle}
-                />
+                /> */}
             </View>
         );
     }

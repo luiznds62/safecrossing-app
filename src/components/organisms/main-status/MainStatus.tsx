@@ -1,11 +1,30 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { TRAFFIC_LIGHT_STATUSES } from '../../../utils/constants';
+import { API_CONSTS, TRAFFIC_LIGHT_STATUSES } from '../../../utils/constants';
 import { TrafficLightStatus } from '../../atoms/traffic-light-status/TrafficLightStatus';
 import Heading from '../../molecules/heading/Heading';
 class MainStatus extends React.Component<any> {
     constructor(props: any) {
         super(props);
+        this.state = {
+            trafficLightStatus: null,
+        };
+    }
+
+    componentDidMount() {
+        var socket = new WebSocket(API_CONSTS.TRAFFIC_LIGHT_WS);
+
+        socket.onopen = () => this.onWsOpen();
+
+        socket.onmessage = (payload) => this.onMessageWs(payload);
+    }
+
+    onWsOpen() {
+        console.log('ws connected');
+    }
+
+    onMessageWs(payload: any) {
+        console.log(payload);
     }
 
     styles = StyleSheet.create({
@@ -14,7 +33,7 @@ class MainStatus extends React.Component<any> {
         },
         trafficLightContainer: {
             marginTop: '4%',
-            ...this.props.cardStyle
+            ...this.props.cardStyle,
         },
     });
 
@@ -23,10 +42,9 @@ class MainStatus extends React.Component<any> {
             <View style={this.styles.container}>
                 <Heading text="Status" />
                 <TrafficLightStatus
-                    block={this.props.block}
                     navigation={this.props.navigation}
+                    status={(this.state as any).trafficLightStatus}
                     style={this.styles.trafficLightContainer}
-                    safe={TRAFFIC_LIGHT_STATUSES.SAFE}
                 />
             </View>
         );

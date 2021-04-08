@@ -5,6 +5,7 @@ export enum TRAFFIC_LIGHT_STATUSES {
 
 export enum API_CONSTS {
     ADDRESS = 'http://safecrossing-api.herokuapp.com',
+    TRAFFIC_LIGHT_WS = 'ws://safecrossing-api.herokuapp.com:80/traffic-light'
 }
 
 export enum HTTP_CODES {

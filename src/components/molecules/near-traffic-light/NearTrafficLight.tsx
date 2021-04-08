@@ -11,6 +11,7 @@ import { Marker } from 'react-native-maps';
 import { TrafficLightService } from '../../../services/TrafficLightService';
 import { LocationService } from '../../../services/LocationService';
 import { Alert } from '../../atoms/alert/Alert';
+import { MainStatus } from '../../organisms/main-status/MainStatus';
 
 class NearTrafficLight extends React.Component<any> {
     private locationService: LocationService;
@@ -36,7 +37,7 @@ class NearTrafficLight extends React.Component<any> {
         this.setState({ loading: bool });
     }
 
-    async componentDidMount() {
+    async fetchData() {
         try {
             this.setLoading(true);
             const location = await this.locationService.getCurrentLocation();
@@ -51,6 +52,7 @@ class NearTrafficLight extends React.Component<any> {
                 metadata: nearbyTrafficLight.metadata,
             });
         } catch (error) {
+            console.log(error);
             Alert(
                 'Erro ao buscar',
                 'Ocorreu um erro ao buscar semáforos próximos, fique alerta!',
@@ -61,6 +63,11 @@ class NearTrafficLight extends React.Component<any> {
         } finally {
             this.setLoading(false);
         }
+    }
+
+    async componentDidMount() {
+        await this.fetchData();
+        setInterval(async () => await this.fetchData(), 60000);
     }
 
     styles = StyleSheet.create({
@@ -77,7 +84,7 @@ class NearTrafficLight extends React.Component<any> {
             paddingLeft: '4%',
         },
         distanceContainer: {
-            paddingLeft: '12%',
+            paddingLeft: '6%',
         },
         distanceText: {
             fontSize: FONT_SIZE_20,
@@ -88,8 +95,11 @@ class NearTrafficLight extends React.Component<any> {
             height: 160,
             borderRadius: 6,
         },
-        loading: { 
-            
+        mainStatus: {
+            paddingTop: '16%',
+        },
+        cardStyle: {
+            height: '70%',
         }
     });
 
@@ -116,9 +126,11 @@ class NearTrafficLight extends React.Component<any> {
                                 />
                             </View>
                         </>
-                    ) : <View style={this.styles.loading}>
-                            <MutedText text="Carregando, aguarde..."/>
-                        </View>}
+                    ) : (
+                        <View>
+                            <MutedText text="Carregando, aguarde..." />
+                        </View>
+                    )}
                 </View>
                 {this.props.showMap && (
                     <View style={this.styles.mapContainer}>
@@ -132,6 +144,12 @@ class NearTrafficLight extends React.Component<any> {
                         </MapView>
                     </View>
                 )}
+                <MainStatus
+                    trafficLight={(this.state as any).nearbyTrafficLight}
+                    navigation={this.props.navigation}
+                    style={this.styles.mainStatus}
+                    cardStyle={this.styles.cardStyle}
+                />
             </View>
         );
     }

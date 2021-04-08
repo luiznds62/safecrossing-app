@@ -1,22 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
-import { COLOR_GREEN, COLOR_RED, COLOR_WHITE } from '../../../styles/colors';
+import { COLOR_GREEN, COLOR_RED, COLOR_WHITE, COLOR_GRAY_MEDIUM } from '../../../styles/colors';
 import { TRAFFIC_LIGHT_STATUSES } from '../../../utils/constants';
 import { SCREENS } from '../../../navigations/screens';
 import Text from '../text/Text';
 
 export const TrafficLightStatus = (props: any) => {
-    let statusColor = COLOR_RED;
+    const descriptionSafe: any = 'Travessia segura';
+    const descriptionWait: any = 'Aguarde para atravessar';
+    const descriptionSearching: any = 'Buscando semáforos...';
 
-    if (props.safe == TRAFFIC_LIGHT_STATUSES.SAFE) {
-        statusColor = COLOR_GREEN;
-    } else {
-        statusColor = COLOR_RED;
-    }
+    const [description, setDescription] = React.useState(descriptionSearching);
+    const [statusColor, setStatusColor] = React.useState(COLOR_GRAY_MEDIUM);
 
-    const textStyle = {
-        color: COLOR_WHITE,
-    };
+    useEffect(() => {
+        if (props.status) {
+            if (props.status === TRAFFIC_LIGHT_STATUSES.SAFE) {
+                setStatusColor(COLOR_GREEN as any);
+                setDescription(descriptionSafe);
+            } else if (props.status === TRAFFIC_LIGHT_STATUSES.WAIT) {
+                setStatusColor(COLOR_RED as any);
+                setDescription(descriptionWait);
+            }
+        }
+    }, []);
 
     const containerStyle = {
         backgroundColor: statusColor,
@@ -28,14 +35,11 @@ export const TrafficLightStatus = (props: any) => {
         ...props.style,
     };
 
-    if (props.block) {
-        delete (textStyle as any).paddingLeft;
-        delete (textStyle as any).paddingRight;
-    }
-
     const styles = StyleSheet.create({
         container: containerStyle,
-        text: textStyle,
+        text: {
+            color: COLOR_WHITE,
+        },
     });
 
     function moveToStatus() {
@@ -47,7 +51,7 @@ export const TrafficLightStatus = (props: any) => {
     return (
         <Pressable onPress={() => moveToStatus()}>
             <View style={styles.container}>
-                <Text style={styles.text} text="Travessia segura" />
+                <Text style={styles.text} text={description} />
             </View>
         </Pressable>
     );

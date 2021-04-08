@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { API_CONSTS, TRAFFIC_LIGHT_STATUSES } from '../../../utils/constants';
+import { API_CONSTS } from '../../../utils/constants';
 import { TrafficLightStatus } from '../../atoms/traffic-light-status/TrafficLightStatus';
 import Heading from '../../molecules/heading/Heading';
 class MainStatus extends React.Component<any> {
@@ -16,15 +16,17 @@ class MainStatus extends React.Component<any> {
 
         socket.onopen = () => this.onWsOpen();
 
-        socket.onmessage = (payload) => this.onMessageWs(payload);
+        socket.onmessage = (e) => {
+            const payload = JSON.parse(e.data);
+            //console.log('Message from server:', JSON.parse(e.data));
+            if (payload.after.id === this.props.trafficLight.id) {
+                this.setState({ trafficLightStatus: payload.newStatus });
+            }
+        };
     }
 
     onWsOpen() {
         console.log('ws connected');
-    }
-
-    onMessageWs(payload: any) {
-        console.log(payload);
     }
 
     styles = StyleSheet.create({

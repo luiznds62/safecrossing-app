@@ -67,7 +67,7 @@ class NearTrafficLight extends React.Component<any> {
 
     async componentDidMount() {
         await this.fetchData();
-        setInterval(async () => await this.fetchData(), 60000);
+        //setInterval(async () => await this.fetchData(), 60000);
     }
 
     styles = StyleSheet.create({
@@ -99,7 +99,7 @@ class NearTrafficLight extends React.Component<any> {
             paddingTop: '16%',
         },
         cardStyle: {
-            height: '70%',
+            height: this.props.block ? '86%' : '70%',
         }
     });
 

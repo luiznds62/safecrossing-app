@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import { COLOR_GREEN, COLOR_RED, COLOR_WHITE, COLOR_GRAY_MEDIUM } from '../../../styles/colors';
 import { TRAFFIC_LIGHT_STATUSES } from '../../../utils/constants';
@@ -14,6 +14,7 @@ export const TrafficLightStatus = (props: any) => {
     const [statusColor, setStatusColor] = React.useState(COLOR_GRAY_MEDIUM);
 
     useEffect(() => {
+        console.log(props.status)
         if (props.status) {
             if (props.status === TRAFFIC_LIGHT_STATUSES.SAFE) {
                 setStatusColor(COLOR_GREEN as any);
@@ -23,7 +24,7 @@ export const TrafficLightStatus = (props: any) => {
                 setDescription(descriptionWait);
             }
         }
-    }, []);
+    }, [props.status]);
 
     const containerStyle = {
         backgroundColor: statusColor,

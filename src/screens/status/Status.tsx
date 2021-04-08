@@ -34,13 +34,7 @@ class Status extends Component {
     render() {
         return (
             <View style={this.styles.container}>
-                <NearTrafficLight style={this.styles.nearTrafficLightContainer} showMap={false} />
-                {/* <MainStatus
-                    block={true}
-                    navigation={this.navigation}
-                    style={this.styles.mainStatus}
-                    cardStyle={this.styles.cardStyle}
-                /> */}
+                <NearTrafficLight block={true} style={this.styles.nearTrafficLightContainer} showMap={false} />
             </View>
         );
     }

@@ -1,6 +1,6 @@
 export enum TRAFFIC_LIGHT_STATUSES {
-    SAFE = 'Safe',
-    WAIT = 'Wait',
+    SAFE = 'SAFE',
+    WAIT = 'WAIT',
 }
 
 export enum API_CONSTS {

@@ -39,7 +39,7 @@ class Main extends Component {
         return (
             <View style={this.styles.container}>
                 <MainHeader name={this.store.user.name} />
-                <NearTrafficLight navigation={this.navigation} style={this.styles.nearTrafficLight} showMap={false} />
+                <NearTrafficLight block={false} navigation={this.navigation} style={this.styles.nearTrafficLight} showMap={false} />
             </View>
         );
     }

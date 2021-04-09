@@ -34,8 +34,6 @@ export class LocationService {
 
     async getCurrentLocation() {
         const location = await Location.getCurrentPositionAsync({});
-        // const addresss = await this.reverseGeocode(location.coords.latitude, location.coords.longitude);
-        // console.log(addresss);
         return location;
     }
 }

@@ -18,7 +18,6 @@ class MainStatus extends React.Component<any> {
 
         socket.onmessage = (e) => {
             const payload = JSON.parse(e.data);
-            //console.log('Message from server:', JSON.parse(e.data));
             if (payload.after.id === this.props.trafficLight.id) {
                 this.setState({ trafficLightStatus: payload.newStatus });
             }
@@ -26,7 +25,7 @@ class MainStatus extends React.Component<any> {
     }
 
     onWsOpen() {
-        console.log('ws connected');
+        console.log('Successfully connected to WebSocket server');
     }
 
     styles = StyleSheet.create({
@@ -44,6 +43,7 @@ class MainStatus extends React.Component<any> {
             <View style={this.styles.container}>
                 <Heading text="Status" />
                 <TrafficLightStatus
+                    block={this.props.block}
                     navigation={this.props.navigation}
                     status={(this.state as any).trafficLightStatus}
                     style={this.styles.trafficLightContainer}

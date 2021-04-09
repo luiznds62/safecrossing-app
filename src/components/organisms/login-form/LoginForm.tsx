@@ -4,9 +4,11 @@ import { COLOR_BLACK, COLOR_WHITE } from '../../../styles/colors';
 import { LoginButtons } from '../../molecules/login-buttons/LoginButtons';
 import { SCREENS } from '../../../navigations/screens';
 import { UserService } from '../../../services/UserService';
-import { HTTP_CODES } from '../../../utils/constants';
+import { HTTP_CODES, TOKEN_EXPIRATION_MILLIS } from '../../../utils/constants';
 import { store } from '../../../store';
 import Input from '../../atoms/input/Input';
+import { Alert } from '../../atoms/alert/Alert';
+import { extractErrorMessage } from '../../../utils/ErrorHandler';
 export class LoginForm extends React.Component<any> {
     private store: any;
     private userService: UserService;
@@ -23,8 +25,13 @@ export class LoginForm extends React.Component<any> {
     }
 
     componentDidMount() {
-        if(this.store.user.name !== "") {
-            this.props.navigation.navigate(SCREENS.MAIN);
+        if (this.store.user.name !== '') {
+            const now: any = new Date();
+            const insertionDate: any = new Date(this.store.insertionDate);
+            const millisDiference: any = parseInt(((now as any) - insertionDate) as any);
+            if (millisDiference < TOKEN_EXPIRATION_MILLIS) {
+                this.props.navigation.navigate(SCREENS.MAIN);
+            }
         }
     }
 
@@ -62,7 +69,13 @@ export class LoginForm extends React.Component<any> {
                 this.props.navigation.navigate(SCREENS.MAIN);
             }
         } catch (error) {
-            console.log(error);
+            Alert(
+                'Erro',
+                extractErrorMessage(error.response),
+                false,
+                () => {},
+                () => {}
+            );
         } finally {
             this.setLoading(false);
         }

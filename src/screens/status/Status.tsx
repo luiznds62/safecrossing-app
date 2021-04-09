@@ -22,13 +22,7 @@ class Status extends Component {
         },
         nearTrafficLightContainer: {
             paddingTop: '24%',
-        },
-        mainStatus: {
-            paddingTop: '8%',
-        },
-        cardStyle: {
-            height: '85%',
-        },
+        }
     });
 
     render() {

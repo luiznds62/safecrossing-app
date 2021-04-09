@@ -7,6 +7,8 @@ import { HTTP_CODES } from '../../../utils/constants';
 import Input from '../../atoms/input/Input';
 import MutedText from '../../atoms/muted-text/MutedText';
 import Button from '../../atoms/button/Button';
+import { Alert } from '../../atoms/alert/Alert';
+import { extractErrorMessage } from '../../../utils/ErrorHandler';
 export class SignUpForm extends React.Component<any> {
     private userService: UserService;
 
@@ -50,13 +52,18 @@ export class SignUpForm extends React.Component<any> {
     async signUp() {
         try {
             const user = this.buildUser();
-            console.log(user);
             const response = await this.userService.createAccount(user);
             if (response.status === HTTP_CODES.OK) {
                 this.navigation.navigate(SCREENS.MAIN);
             }
         } catch (error) {
-            console.log(error);
+            Alert(
+                'Erro',
+                extractErrorMessage(error.response),
+                false,
+                () => {},
+                () => {}
+            );
         }
     }
 

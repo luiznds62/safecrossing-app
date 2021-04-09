@@ -52,7 +52,6 @@ class NearTrafficLight extends React.Component<any> {
                 metadata: nearbyTrafficLight.metadata,
             });
         } catch (error) {
-            console.log(error);
             Alert(
                 'Erro ao buscar',
                 'Ocorreu um erro ao buscar semáforos próximos, fique alerta!',
@@ -99,8 +98,8 @@ class NearTrafficLight extends React.Component<any> {
             paddingTop: '16%',
         },
         cardStyle: {
-            height: this.props.block ? '86%' : '70%',
-        }
+            height: this.props.block ? '90%' : '77%',
+        },
     });
 
     render() {
@@ -145,6 +144,7 @@ class NearTrafficLight extends React.Component<any> {
                     </View>
                 )}
                 <MainStatus
+                    block={this.props.block}
                     trafficLight={(this.state as any).nearbyTrafficLight}
                     navigation={this.props.navigation}
                     style={this.styles.mainStatus}

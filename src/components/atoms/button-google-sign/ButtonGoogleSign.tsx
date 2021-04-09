@@ -31,7 +31,6 @@ class ButtonGoogleSign extends React.Component<any> {
     }
 
     sign() {
-        console.log('sign');
     }
 
     render() {

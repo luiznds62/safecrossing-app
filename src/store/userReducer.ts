@@ -3,6 +3,7 @@ import { REDUX_CONTS } from './../utils/constants';
 const INITIAL_STATE = {
     user: {},
     accessToken: '',
+    insertionDate: ''
 };
 
 function userReducer(state = INITIAL_STATE, action: any) {
@@ -13,6 +14,7 @@ function userReducer(state = INITIAL_STATE, action: any) {
                 ...state,
                 user: action.user,
                 accessToken: action.accessToken,
+                insertionDate: new Date()
             };
 
             return dispatchIn;
@@ -21,6 +23,7 @@ function userReducer(state = INITIAL_STATE, action: any) {
                 ...state,
                 user: {},
                 authToken: '',
+                insertionDate: ''
             };
 
             return dispatchOut;

@@ -12,15 +12,18 @@ import { TrafficLightService } from '../../../services/TrafficLightService';
 import { LocationService } from '../../../services/LocationService';
 import { Alert } from '../../atoms/alert/Alert';
 import { MainStatus } from '../../organisms/main-status/MainStatus';
+import { SpeechService } from '../../../services/SpeechService';
 
 class NearTrafficLight extends React.Component<any> {
     private locationService: LocationService;
     private trafficLightService: TrafficLightService;
+    private speechService: SpeechService;
 
     constructor(props: any) {
         super(props);
         this.locationService = new LocationService();
         this.trafficLightService = new TrafficLightService();
+        this.speechService = new SpeechService();
         this.state = {
             location: '',
             coordinate: {
@@ -40,10 +43,15 @@ class NearTrafficLight extends React.Component<any> {
     async fetchData() {
         try {
             this.setLoading(true);
+            this.speechService.stop();
             const location = await this.locationService.getCurrentLocation();
             const nearbyTrafficLight = await this.trafficLightService.findNearby(
                 location.coords.latitude,
                 location.coords.longitude
+            );
+
+            this.speechService.speak(
+                `Semáforo mais próximo encontrado em: ${nearbyTrafficLight.metadata.destinationAddress}, a uma distância de: ${nearbyTrafficLight.metadata.distance} km`
             );
 
             this.setState({

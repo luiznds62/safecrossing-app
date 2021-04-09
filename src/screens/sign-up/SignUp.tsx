@@ -5,20 +5,31 @@ import { COLOR_WHITE } from '../../styles/colors';
 import { NavigateBack } from '../../components/atoms/navigate-back/NavigateBack';
 import { SignUpHeader } from '../../components/organisms/sign-up-header/SignUpHeader';
 import { SignUpForm } from '../../components/organisms/sign-up-form/SignUpForm';
-
+import { SpeechService } from '../../services/SpeechService';
+import { SPEECHES } from '../../utils/constants';
 class SignUp extends Component {
-    navigation: any;
+    private speechService: SpeechService;
+    private navigation: any;
 
     constructor(props: any) {
         super(props);
         this.navigation = props.navigation;
+        this.speechService = new SpeechService();
+    }
+
+    componentDidMount() {
+        this.speechService.speak(SPEECHES.SIGN_UP.ON_MOUNT);
+    }
+
+    componentWillUnmount() {
+        this.speechService.stop();
     }
 
     render() {
         return (
             <View style={styles.container}>
                 <NavigateBack navigation={this.navigation} />
-                <SignUpHeader/>
+                <SignUpHeader />
                 <SignUpForm navigation={this.navigation} />
             </View>
         );

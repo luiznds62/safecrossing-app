@@ -25,8 +25,11 @@ class Initial extends Component {
         this.speechService.speak(SPEECHES.INITIAL.ON_MOUNT);
     }
 
-    moveToLogin() {
+    componentWillUnmount() {
         this.speechService.stop();
+    }
+
+    moveToLogin() {
         this.navigation.navigate(SCREENS.LOGIN);
     }
 

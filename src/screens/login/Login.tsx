@@ -3,9 +3,8 @@ import { StyleSheet, View } from 'react-native';
 import { LoginForm } from '../../components/organisms/login-form/LoginForm';
 import { LoginHeader } from '../../components/organisms/login-header/LoginHeader';
 import { COLOR_WHITE } from '../../styles/colors';
-
 class Login extends Component {
-    navigation: any;
+    private navigation: any;
 
     constructor(props: any) {
         super(props);
@@ -15,8 +14,8 @@ class Login extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <LoginHeader navigation={this.navigation}/>
-                <LoginForm navigation={this.navigation}/>
+                <LoginHeader navigation={this.navigation} />
+                <LoginForm navigation={this.navigation} />
             </View>
         );
     }
@@ -26,7 +25,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: COLOR_WHITE,
-    }
+    },
 });
 
 export default Login;

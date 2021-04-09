@@ -6,7 +6,11 @@ import { COLOR_WHITE } from '../../styles/colors';
 import { NearTrafficLight } from '../../components/molecules/near-traffic-light/NearTrafficLight';
 import { MainStatus } from '../../components/organisms/main-status/MainStatus';
 import { store } from '../../store/index';
+import { SpeechService } from '../../services/SpeechService';
+import { SPEECHES } from '../../utils/constants';
+import { SCREENS } from '../../navigations/screens';
 class Main extends Component {
+    private speechService: SpeechService;
     private store: any;
     private navigation: any;
 
@@ -14,9 +18,13 @@ class Main extends Component {
         super(props);
         this.navigation = props.navigation;
         this.store = store.getState().userReducer;
-        this.state = {
-            location: '',
-        };
+        this.speechService = new SpeechService();
+
+        if (!this.store.user.name) {
+            this.speechService.speak(SPEECHES.MAIN.ON_MOUNT);
+        } else {
+            this.speechService.speak(SPEECHES.MAIN.ON_MOUNT.replace('Convidado', this.store.user.name));
+        }
     }
 
     styles = StyleSheet.create({
@@ -32,14 +40,19 @@ class Main extends Component {
         },
         nearTrafficLight: {
             paddingTop: '16%',
-        }
+        },
     });
 
     render() {
         return (
             <View style={this.styles.container}>
                 <MainHeader name={this.store.user.name} />
-                <NearTrafficLight block={false} navigation={this.navigation} style={this.styles.nearTrafficLight} showMap={false} />
+                <NearTrafficLight
+                    block={false}
+                    navigation={this.navigation}
+                    style={this.styles.nearTrafficLight}
+                    showMap={false}
+                />
             </View>
         );
     }

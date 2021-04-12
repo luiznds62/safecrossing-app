@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Heading from '../../components/molecules/heading/Heading';
 import ImageLogo from '../../components/molecules/image-logo/ImageLogo';
 import MutedText from '../../components/atoms/muted-text/MutedText';

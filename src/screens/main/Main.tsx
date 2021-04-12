@@ -4,11 +4,9 @@ import { FONT_FAMILY_BOLD, LINE_HEIGHT_26 } from '../../styles/typography';
 import { MainHeader } from '../../components/organisms/main-header/MainHeader';
 import { COLOR_WHITE } from '../../styles/colors';
 import { NearTrafficLight } from '../../components/molecules/near-traffic-light/NearTrafficLight';
-import { MainStatus } from '../../components/organisms/main-status/MainStatus';
 import { store } from '../../store/index';
 import { SpeechService } from '../../services/SpeechService';
 import { SPEECHES } from '../../utils/constants';
-import { SCREENS } from '../../navigations/screens';
 class Main extends Component {
     private speechService: SpeechService;
     private store: any;
@@ -19,12 +17,18 @@ class Main extends Component {
         this.navigation = props.navigation;
         this.store = store.getState().userReducer;
         this.speechService = new SpeechService();
+    }
 
+    componentDidMount() {
         if (!this.store.user.name) {
             this.speechService.speak(SPEECHES.MAIN.ON_MOUNT);
         } else {
             this.speechService.speak(SPEECHES.MAIN.ON_MOUNT.replace('Convidado', this.store.user.name));
         }
+    }
+
+    componentWillUnmount() {
+        this.speechService.stop();
     }
 
     styles = StyleSheet.create({

@@ -2,6 +2,7 @@ import { combineReducers, createStore } from 'redux';
 import { persistStore, persistReducer } from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import userReducer from './userReducer';
+import speakReducer from './speakReducer';
 
 const persistConfig = {
     key: 'user',
@@ -10,6 +11,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
     userReducer: userReducer,
+    speakReducer: speakReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

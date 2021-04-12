@@ -3,17 +3,16 @@ import { View, StyleSheet } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { COLOR_ACCENT, COLOR_PRIMARY } from '../../../styles/colors';
 import { FONT_SIZE_20 } from '../../../styles/typography';
-import Heading from '../heading/Heading';
-import Text from '../../atoms/text/Text';
-import MutedText from '../../atoms/muted-text/MutedText';
-import MapView from 'react-native-maps';
 import { Marker } from 'react-native-maps';
 import { TrafficLightService } from '../../../services/TrafficLightService';
 import { LocationService } from '../../../services/LocationService';
 import { Alert } from '../../atoms/alert/Alert';
 import { MainStatus } from '../../organisms/main-status/MainStatus';
 import { SpeechService } from '../../../services/SpeechService';
-
+import Heading from '../heading/Heading';
+import Text from '../../atoms/text/Text';
+import MutedText from '../../atoms/muted-text/MutedText';
+import MapView from 'react-native-maps';
 class NearTrafficLight extends React.Component<any> {
     private locationService: LocationService;
     private trafficLightService: TrafficLightService;
@@ -74,7 +73,6 @@ class NearTrafficLight extends React.Component<any> {
 
     async componentDidMount() {
         await this.fetchData();
-        //setInterval(async () => await this.fetchData(), 60000);
     }
 
     styles = StyleSheet.create({
@@ -153,6 +151,7 @@ class NearTrafficLight extends React.Component<any> {
                 )}
                 <MainStatus
                     block={this.props.block}
+                    metadata={(this.state as any).metadata}
                     trafficLight={(this.state as any).nearbyTrafficLight}
                     navigation={this.props.navigation}
                     style={this.styles.mainStatus}

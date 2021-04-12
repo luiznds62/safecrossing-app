@@ -1,4 +1,8 @@
 export const extractErrorMessage = (response: any): string => {
+    if (!response) {
+        return 'Ocorreu um erro interno';
+    }
+
     let errorsArray = response.data.message.split(',');
 
     if (errorsArray.length === 1) {

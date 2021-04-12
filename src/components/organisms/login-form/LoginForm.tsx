@@ -25,6 +25,8 @@ export class LoginForm extends React.Component<any> {
             password: '',
             loading: false,
         };
+
+        this.speechService.speak(SPEECHES.LOGIN.ON_MOUNT);
     }
 
     componentDidMount() {
@@ -33,13 +35,14 @@ export class LoginForm extends React.Component<any> {
             const insertionDate: any = new Date(this.store.insertionDate);
             const millisDiference: any = parseInt(((now as any) - insertionDate) as any);
             if (millisDiference < TOKEN_EXPIRATION_MILLIS) {
-                console.log('caiu aqui');
                 this.speechService.stop();
                 this.props.navigation.navigate(SCREENS.MAIN);
             }
-        } else {
-            this.speechService.speak(SPEECHES.LOGIN.ON_MOUNT);
         }
+    }
+
+    componentWillUnmount() {
+        this.speechService.stop();
     }
 
     styles = StyleSheet.create({
@@ -70,7 +73,6 @@ export class LoginForm extends React.Component<any> {
     async doLogin(isGuess: any) {
         try {
             this.setLoading(true);
-            this.props.speech.stop();
             const login = this.buildLogin(isGuess);
             const response = await this.userService.login(login);
             if (response.status === HTTP_CODES.OK) {

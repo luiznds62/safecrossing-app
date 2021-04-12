@@ -1,9 +1,9 @@
-import { REDUX_CONTS } from './../utils/constants';
+import { REDUX_CONTS } from '../utils/constants';
 
 const INITIAL_STATE = {
     user: {},
     accessToken: '',
-    insertionDate: ''
+    insertionDate: '',
 };
 
 function userReducer(state = INITIAL_STATE, action: any) {
